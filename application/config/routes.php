@@ -40,7 +40,10 @@
 
 $route['default_controller'] = "welcome";
 $route['404_override'] = '';
-
+$route['seller'] = 'seller/index';
+#$route['seller/menu'] = 'seller/menu';
+#$route['seller/top'] = 'seller/top';
+#$route['seller/main'] = 'seller/main';
 
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */
