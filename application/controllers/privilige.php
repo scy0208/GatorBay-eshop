@@ -7,6 +7,7 @@ class Privilige extends CI_Controller
 		parent::__construct();
 		$this->load->helper('captcha');
 		$this->load->library('form_validation');
+		$this->load->model('user_model');
 	}
 	public function login()
 	{ 
@@ -45,17 +46,18 @@ class Privilige extends CI_Controller
 		} 
 		else
 		{
+			
 			$captcha = strtolower($this->input->post('captcha'));
 			$code = strtolower($this->session->userdata('code'));
-			if ($captcha===$code)
+			if ($captcha!=$code)
 			{
 				$usertype = strtolower($this->input->post('usertype'));
 				$email = strtolower($this->input->post('email'));
 				$password = strtolower($this->input->post('password'));
 
-				if($usertype=='seller'&&$email=='scy0208@gmail.com'&&$password=='123')
+				if($this->user_model->check_identity($usertype,$email,$password))
 				{
-					redirect('seller/index');
+					redirect($usertype."/main/index");
 				}
 				else
 				{

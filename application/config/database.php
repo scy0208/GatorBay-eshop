@@ -45,7 +45,8 @@
 | the active record class
 */
 
-$active_group = 'default';
+#$active_group = 'test';
+$active_group = 'test';
 $active_record = TRUE;
 
 $db['default']['hostname'] = 'oracle.cise.ufl.edu:1521/orcl';
@@ -63,6 +64,22 @@ $db['default']['dbcollat'] = 'utf8_general_ci';
 $db['default']['swap_pre'] = '';
 $db['default']['autoinit'] = TRUE;
 $db['default']['stricton'] = FALSE;
+
+$db['test']['hostname'] = '127.0.0.1';
+$db['test']['username'] = 'root';
+$db['test']['password'] = '123';
+$db['test']['database'] = 'cishop';
+$db['test']['dbdriver'] = 'mysql';
+$db['test']['dbprefix'] = '';
+$db['test']['pconnect'] = TRUE;
+$db['test']['db_debug'] = TRUE;
+$db['test']['cache_on'] = FALSE;
+$db['test']['cachedir'] = '';
+$db['test']['char_set'] = 'utf8';
+$db['test']['dbcollat'] = 'utf8_general_ci';
+$db['test']['swap_pre'] = '';
+$db['test']['autoinit'] = TRUE;
+$db['test']['stricton'] = FALSE;
 
 
 /* End of file database.php */

@@ -1,6 +1,6 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Seller extends CI_Controller
+class Main extends CI_Controller
 {
 	public function index()
 	{
@@ -19,7 +19,7 @@ class Seller extends CI_Controller
 	{
 		$this->load->view('seller/drag.html');
 	}
-	public function main()
+	public function content()
 	{
 		$this->load->view('seller/main.html');
 	}
