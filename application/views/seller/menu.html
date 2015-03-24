@@ -34,7 +34,7 @@
 	<div id="tabbar-div">
 		<p>
 			<span style="float:right; padding: 3px 5px;">
-				<a href="javascript:toggleCollapse();"><img id="toggleImg" src="images/menu_minus.gif" width="9" height="9" border="0" alt="闭合"></a>
+				<a href="javascript:toggleCollapse();"><img id="toggleImg" src="<?php echo base_url('src/images/menu_minus.gif');?>" width="9" height="9" border="0" alt="闭合"></a>
 			</span>
 			<span class="tab-front" id="menu-tab">菜单</span>
 		</p>
@@ -192,7 +192,7 @@ function toggleCollapse()
   }
 
   collapse = !collapse;
-  document.getElementById('toggleImg').src = collapse ? 'images/menu_minus.gif' : 'images/menu_plus.gif';
+  document.getElementById('toggleImg').src = collapse ? "<?php echo base_url('src/images/menu_minus.gif');?>" : "<?php echo base_url('src/images/menu_plus.gif');?>";
   document.getElementById('toggleImg').alt = collapse ? collapse_all : expand_all;
 }
 
@@ -411,7 +411,7 @@ Object.extend(ToggleHanlder ,{
         }
      }
     }
-    document.getElementById('toggleImg').src = collapse ? 'images/menu_minus.gif' : 'images/menu_plus.gif';
+    document.getElementById('toggleImg').src = collapse ? "<?php echo base_url('src/images/menu_minus.gif');?>" : "<?php echo base_url('src/images/menu_plus.gif');?>";
     document.getElementById('toggleImg').alt = collapse ? collapse_all : expand_all;
   }
 });

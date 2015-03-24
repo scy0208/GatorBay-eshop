@@ -48,11 +48,11 @@
 $active_group = 'default';
 $active_record = TRUE;
 
-$db['default']['hostname'] = 'localhost';
-$db['default']['username'] = '';
-$db['default']['password'] = '';
-$db['default']['database'] = '';
-$db['default']['dbdriver'] = 'mysql';
+$db['default']['hostname'] = 'oracle.cise.ufl.edu:1521/orcl';
+$db['default']['username'] = 'chunyang';
+$db['default']['password'] = '9mxzw02bf';
+$db['default']['database'] = 'COP5725';
+$db['default']['dbdriver'] = 'oci8';
 $db['default']['dbprefix'] = '';
 $db['default']['pconnect'] = TRUE;
 $db['default']['db_debug'] = TRUE;
