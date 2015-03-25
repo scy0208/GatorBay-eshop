@@ -36,18 +36,18 @@
 			<span style="float:right; padding: 3px 5px;">
 				<a href="javascript:toggleCollapse();"><img id="toggleImg" src="<?php echo base_url('src/images/menu_minus.gif');?>" width="9" height="9" border="0" alt="闭合"></a>
 			</span>
-			<span class="tab-front" id="menu-tab">菜单</span>
+			<span class="tab-front" id="menu-tab">MENU</span>
 		</p>
 	</div>
 
 	<div id="main-div">
 		<div id="menu-list">
 			<ul id="menu-ul">
-				<li class="explode" key="02_cat_and_goods" name="menu"> 商品管理        
+				<li class="explode" key="02_cat_and_goods" name="menu"> Commodity Management       
 					<ul>
 						  <li class="menu-item"><a href="goods.php?act=list" target="main-frame">商品列表</a></li>
 						  <li class="menu-item"><a href="goods.php?act=add" target="main-frame">添加新商品</a></li>
-						  <li class="menu-item"><a href="category.php?act=list" target="main-frame">商品分类</a></li>
+						  <li class="menu-item"><a href="<?php echo site_url('admin/category')?>" target="main-frame">Commodity Category</a></li>
 						  <li class="menu-item"><a href="comment_manage.php?act=list" target="main-frame">用户评论</a></li>
 						  <li class="menu-item"><a href="brand.php?act=list" target="main-frame">商品品牌</a></li>
 						  <li class="menu-item"><a href="goods_type.php?act=list" target="main-frame">商品类型</a></li>
