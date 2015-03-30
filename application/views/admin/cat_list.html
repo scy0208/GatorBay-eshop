@@ -1,67 +1,63 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html>
 <head>
-<title>SHOP 管理中心 - 商品分类 </title>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<link href="<?php echo base_url('src/styles/general.css');?>" rel="stylesheet" type="text/css" />
-<link href="<?php echo base_url('src/styles/main.css');?>" rel="stylesheet" type="text/css" />
-</head>
-<body>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="<?=base_url("src/styles/bootstrap.min.css")?>">
+    <link rel="stylesheet" href="<?=base_url("src/styles/dashboard.css")?>">
+    <title>Admin Dashbord</title>
+ </head>
 
-<h1>
-<span class="action-span"><a href="<?php echo site_url('admin/category/add')?>">Add Catrgory</a></span>
-<span class="action-span1"><a href="<?php echo site_url('admin/category/index')?>">SHOP Dashbord</a> </span><span id="search_id" class="action-span1"> - Commodity Category </span>
-<div style="clear:both"></div>
-</h1>
+<div class="row">
+	<div class="col-md-9">
+		<div class="media">
+		  <div class="media-left">
+		      <img class="media-object" src="<?=base_url("src/images/category-icon.png")?>" width="64px" length="64px">
+		  </div>
+		  <div class="media-body">
+		    <h3 class="media-heading">Category Management</h3>
+		    Manage your categories of commodities here
+		  </div>
+		</div>
+	</div>
+	<div class="col-md-2">
+		<a type="button" class="btn btn-primary pull-right" href="<?=site_url("admin/category/add")?>">
+			Add New Catecory
+		</a>
+	</div>
+</div>
 
-<form method="post" action="" name="listForm">
-<!-- start ad position list -->
-	<div class="list-div" id="listDiv">
-		<table width="100%" cellspacing="1" cellpadding="2" id="list-table">
-			<tbody>
+<div class = "container">
+	<table class="table">
+		<caption>All Categories</caption>
+		<thead>
+			<tr>
+				<th>Category Name</th>
+				<th>Commodity Number</th>
+				<th>Navigation</th>
+				<th>Sort</th>
+				<th>Operation</th>
+			</tr>
+		</thead>
+		<tbody>
+			<?php foreach($cates as $cate) :?>
 				<tr>
-					<th>Category Name</th>
-					<th>Commodity Number</th>
-					<th>Unit</th>
-					<th>Navigation</th>
-					<th>Display or Not</th>
-					<th>Price Level</th>
-					<th>Sort</th>
-					<th>Operation</th>
-				</tr>
-        <?php foreach($cates as $cate) :?>
-				<tr align="center" class="0" id="0_1">
-					<td align="left" class="first-cell" width="25%">
-            <?php echo str_repeat('&nbsp;&nbsp;&nbsp;&nbsp;',$cate['level'])?>
-						<img src="<?php echo base_url('src/images/menu_arrow.gif')?>" id="icon_0_1" width="9" height="9" border="0" style="margin-left:0em" onclick="rowClicked(this)"> 
-						<span><a href="goods.php?act=list&amp;cat_id=1"><?php echo $cate['cat_name']?></a></span>
+					<td><span class ="glyphicon glyphicon-pencil"></span>
+						<?php echo str_repeat('&nbsp;&nbsp;&nbsp;&nbsp;',$cate['level']).$cate['cat_name']?></td>
+					<td></td>
+					<td>
+						<img src="<?php echo base_url("src/images/message_").$cate['is_show'].".png";?>" width="20px" height="20px">
+						</img>
 					</td>
-					<td width="10%">0</td>
-					<td width="10%"><span onclick="listTable.edit(this, 'edit_measure_unit', 1)" title="点击修改内容" style=""></span></td>
-					<td width="10%"><img src="images/no.gif" onclick="listTable.toggle(this, 'toggle_show_in_nav', 1)"></td>
-					<td width="10%"><img src="images/yes.gif" onclick="listTable.toggle(this, 'toggle_is_show', 1)"></td>
-					<td><span onclick="listTable.edit(this, 'edit_grade', 1)" title="点击修改内容" style="">5</span></td>
-					<td width="10%" ><span onclick="listTable.edit(this, 'edit_sort_order', 1)" title="点击修改内容" style=""><?php echo $cate['sort_order']?></span></td>
-					<td width="50%" align="center">
-						<a href="<?php echo site_url("admin/category/delete/".$cate['cat_id'])?>">Remove Commodity</a> |
-						<a href="<?php echo site_url("admin/category/edit/".$cate['cat_id'])?>">Edit</a> |
-						<a href="javascript:;" onclick="listTable.remove(1, '您确认要删除这条记录吗?')" title="移除">Remove</a>
+					<td><?php echo $cate['sort_order']?></td>
+					<td>
+						<a href="<?php echo site_url("admin/category/delete/".$cate['cat_id'])?>">Remove</a> |
+						<a href="<?php echo site_url("admin/category/edit/".$cate['cat_id'])?>">Edit</a> 
 					</td>
 				</tr>
-      <?php endforeach; ?>
-	</tbody>
-  </table>
+			<?php endforeach;?>
+		</tbody>
+	</table>
 </div>
-</form>
-
-  </table>
-</div>
-</form>
-
-
-<div id="footer">
-	版权所有 &copy; 2006-2013 传智播客 - PHP培训 - </div>
-</div>
-
-</body>
-</html>

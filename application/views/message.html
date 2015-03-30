@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Refresh" content ="<?php echo $wait;?> ;url=<?php echo $url;?>"/>
+	<link rel="stylesheet" href="<?=base_url("src/styles/bootstrap.min.css")?>">
+    <link rel="stylesheet" href="<?=base_url("src/styles/dashboard.css")?>">
+    <title>Admin Dashbord</title>
+ </head>
+
+
+ 	<div class="media">
+		  <div class="media-left">
+		      <img class="media-object" src="<?php echo base_url("src/images/message_").$type.".png";?>" width="64px" length="64px">
+		  </div>
+		  <div class="media-body">
+		    <h3 class="media-heading"><?php echo $message;?></h3>
+		  </div>
+	</div>
+ 

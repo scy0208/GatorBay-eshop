@@ -1,90 +1,76 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html>
 <head>
-<title>SHOP Dashboard - Add Category </title>
-<meta name="robots" content="noindex, nofollow">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<link href="<?php echo base_url('src/styles/general.css');?>" rel="stylesheet" type="text/css" />
-<link href="<?php echo base_url('src/styles/main.css');?>" rel="stylesheet" type="text/css" />
-</head>
-<body>
-
-<h1>
-<span class="action-span"><a href="<?php echo site_url("admin/category/index")?>">Commodity Category</a></span>
-<span class="action-span1"><a href="index.php?act=main">SHOP Dashboard</a> </span><span id="search_id" class="action-span1"> - Add Category </span>
-<div style="clear:both"></div>
-</h1>
-<!-- start add new category form -->
-<div class="main-div">
-  <form action="<?php echo site_url('admin/category/insert')?>" method="post" name="theForm" enctype="multipart/form-data" onsubmit="return validate()">
-	 <table width="100%" id="general-table">
-		<tbody>
-			<tr>
-				<td class="label">Category Name:</td>
-				<td><input type="text" name="cat_name" maxlength="20" value="" size="27"> <font color="red">*</font></td>
-			</tr>
-			<tr>
-				<td class="label">Up Level Category:</td>
-				<td>
-					<select name="parent_id">
-						<option value="0">Top Category</option>
-						<?php foreach($cates as $cate) :?>
-
-							<option value= "<?php echo $cate['cat_id'] ;?>"><?php echo str_repeat('&nbsp;&nbsp;&nbsp;&nbsp;',$cate['level']).$cate['cat_name']?></option>
-
-						<?php endforeach?>         
-					</select>
-				</td>
-			</tr>
-
-			<tr id="measure_unit">
-				<td class="label">Measure Unit:</td>
-				<td><input type="text" name="unit" value="" size="12"></td>
-			</tr>
-			<tr>
-				<td class="label">Sort Order:</td>
-				<td><input type="text" name="sort_order" value="50" size="15"></td>
-			</tr>
-
-			<tr>
-				<td class="label">Display or Not:</td>
-				<td><input type="radio" name="is_show" value="1" checked="true"> Yes <input type="radio" name="is_show" value="0"> No  </td>
-			</tr>
-			<tr>
-				<td class="label">Display in Navigation:</td>
-				<td><input type="radio" name="show_in_nav" value="1"> Yes  <input type="radio" name="show_in_nav" value="0" checked="true"> No  </td>
-			</tr>
-			<tr>
-				<td class="label">Recommend in Home:</td>
-				<td>
-					<input type="checkbox" name="cat_recommend[]" value="1"> 精品          
-					<input type="checkbox" name="cat_recommend[]" value="2"> 最新          
-					<input type="checkbox" name="cat_recommend[]" value="3"> 热门       
-				</td>
-			</tr>
-      <tr>
-        <td class="label">Category Discribe:</td>
-        <td>
-          <textarea name="cat_desc" rows="6" cols="48"></textarea>
-        </td>
-      </tr>
-      </tbody></table>
-      <div class="button-div">
-        <input type="submit" value=" submit ">
-        <input type="reset" value=" reset ">
-      </div>
-    <input type="hidden" name="act" value="insert">
-    <input type="hidden" name="old_cat_name" value="">
-  </form>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="<?=base_url("src/styles/bootstrap.min.css")?>">
+    <link rel="stylesheet" href="<?=base_url("src/styles/dashboard.css")?>">
+    <title>Admin Dashbord</title>
+ </head>
+ <div class="row">
+	<div class="col-md-9">
+		<div class="media">
+		  <div class="media-left">
+		      <img class="media-object" src="<?=base_url("src/images/category-icon.png")?>" width="64px" length="64px">
+		  </div>
+		  <div class="media-body">
+		    <h3 class="media-heading">Category Management</h3>
+		    Add a new category here
+		  </div>
+		</div>
+	</div>
+	<div class="col-md-2">
+		<a type="button" class="btn btn-primary pull-right" href="<?=site_url("admin/category/index")?>">
+			Back to Category List
+		</a>
+	</div>
 </div>
 
+<div class="container">
+	<form action="<?php echo site_url('admin/category/insert')?>" method="post">
+		<div class="form-group">
+			<label for="cat_name">Category Name:</label>
+			<input type="text" class="form-control" name="cat_name" id="cat_name" placeholder="Enter category name">
+		</div>
+		<div class="form-group">
+			<label for="parent_id">Up Level Category:</label>
+			<select class="form-control" name="parent_id" id="parent_id">
+				<option value="0">Top Category</option>
+				<?php foreach($cates as $cate) :?>
 
+				<option value= "<?php echo $cate['cat_id'] ;?>">
+					<?php echo str_repeat('&nbsp;&nbsp;&nbsp;&nbsp;',$cate['level']).$cate['cat_name']?>
+				</option>
 
-<div id="footer">
-	Copyrights &copy; 2015 Chunyang Shen
+				<?php endforeach?>  
+			</select>
+		</div>
+		<div class="form-group">
+			<label for="unit">Measure Unit:</label>
+			<input type="text" class="form-control" name="unit" id="unit" placeholder="Enter measure unit">
+		</div>
+		<div class="form-group">
+			<label for="unit">Sort Order:</label>
+			<input type="text" class="form-control" name="sort_order" id="sort_order" placeholder="Enter sort order">
+		</div>
+		<div class="form-group">
+			<label class="radio-inline">
+				<input type="radio" name="is_show" id="is_show" value="1" checked="true"> Yes
+			</label>
+			<label class="radio-inline">
+				<input type="radio" name="is_show" id="is_show" value="0">  No
+			</label>
+		</div>
+		<div class="form-group">
+			<label for="cat_desc">Description:</label>
+			<textarea class="form-control" name="cat_desc" id="cat_desc"  rows="4" placeholder="Enter the description of this category">
+			</textarea>
+		</div>
+
+		
+		<button type="submit" class="btn btn-primary">Submit</button>
+		<button type="reset" class="btn btn-danger">Reset</button>
+	</form>
 </div>
-
-</div>
-
-</body>
-</html>

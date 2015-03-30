@@ -33,10 +33,11 @@ class Category extends CI_Controller
 		$this->form_validation->set_rules('cat_name','Category Name', 'trim|required');
 		if ($this->form_validation->run()==false) 
 		{
+			$data['type'] = "0";
 			$data['message'] = validation_errors();
 			$data['wait']=3;
 			$data['url']=site_url('admin/category/add');
-			$this->load->view('admin/message.html',$data);			
+			$this->load->view('message.html',$data);			
 		}
 		else
 		{
@@ -49,17 +50,19 @@ class Category extends CI_Controller
 			$data['cat_desc']=$this->input->post('cat_desc',true);
 			if($this->category_model->update_cate($data))
 			{
+				$data['type'] = "1";
 				$data['message'] = "Update Successful";
 				$data['wait']=2;
 				$data['url']=site_url('admin/category/index');
-				$this->load->view('admin/message.html',$data);
+				$this->load->view('message.html',$data);
 			}
 			else
 			{
+				$data['type'] = "0";
 				$data['message'] = "Update Failed";
 				$data['wait']=3;
 				$data['url']=site_url('admin/category/index');
-				$this->load->view('admin/message.html',$data);
+				$this->load->view('message.html',$data);
 			}
 		}
 
@@ -70,10 +73,11 @@ class Category extends CI_Controller
 		$this->form_validation->set_rules('cat_name','Category Name', 'trim|required');
 		if ($this->form_validation->run()==false) 
 		{
+			$data['type'] = "0";
 			$data['message'] = validation_errors();
 			$data['wait']=3;
 			$data['url']=site_url('admin/category/add');
-			$this->load->view('admin/message.html',$data);			
+			$this->load->view('message.html',$data);			
 		}
 		else
 		{
@@ -85,17 +89,19 @@ class Category extends CI_Controller
 			$data['cat_desc']=$this->input->post('cat_desc',true);
 			if($this->category_model->insert_cate($data))
 			{
+				$data['type'] = "1";
 				$data['message'] = "Insert Successful";
 				$data['wait']=2;
 				$data['url']=site_url('admin/category/index');
-				$this->load->view('admin/message.html',$data);
+				$this->load->view('message.html',$data);
 			}
 			else
 			{
+				$data['type'] = "0";
 				$data['message'] = "Insert Failed";
 				$data['wait']=3;
 				$data['url']=site_url('admin/category/index');
-				$this->load->view('admin/message.html',$data);
+				$this->load->view('message.html',$data);
 			}
 		}
 
@@ -106,17 +112,19 @@ class Category extends CI_Controller
 
 		if($this->category_model->delete_cate($cat_id))
 		{
+			$data['type'] = "1";
 			$data['message'] = "Delete Successful";
 			$data['wait']=3;
 			$data['url']=site_url('admin/category/index');
-			$this->load->view('admin/message.html',$data);
+			$this->load->view('message.html',$data);
 		}
 		else
 		{
+			$data['type'] = "0";
 			$data['message'] = "Delete Failed";
 			$data['wait']=3;
 			$data['url']=site_url('admin/category/index');
-			$this->load->view('admin/message.html',$data);
+			$this->load->view('message.html',$data);
 		}
 
 

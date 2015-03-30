@@ -7,11 +7,12 @@ class Main extends CI_Controller
 		$this->load->view('admin/index.html');
 		#echo site_url('seller/top');
 	}
+	/*
 	public function top()
 	{
 		$this->load->view('admin/top.html');
 	}
-	public function menu()
+	public function xmenu()
 	{
 		$this->load->view('admin/menu.html');
 	}
@@ -23,4 +24,5 @@ class Main extends CI_Controller
 	{
 		$this->load->view('admin/main.html');
 	}
+	*/
 }
