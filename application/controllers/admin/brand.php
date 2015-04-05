@@ -35,7 +35,7 @@ class Brand extends CI_Controller
 		}
 		else
 		{
-			$config['upload_path']='./src/uploads/';
+			$config['upload_path']="./src/uploads/";
 			$config['allowed_types']='gif|png|jpg';
 			$config['max_size']=100;
 			$this->load->library('upload',$config);

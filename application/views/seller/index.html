@@ -1,19 +1,94 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html>
 <head>
-<title>GatorBay Seller's Dashboard</title>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="<?=base_url("src/styles/bootstrap.min.css")?>">
+    <link rel="stylesheet" href="<?=base_url("src/styles/dashboard.css")?>">
+    <title>Admin Dashbord</title>
+ </head>   
 
-<frameset rows="51,*" framespacing="0" border="0">
-  <frame src="<?=site_url('seller/main/top')?>" id="header-frame" name="header-frame" frameborder="no" scrolling="no">
-  <frameset cols="180, 10, *" framespacing="0" border="0" id="frame-body">
-    <frame src="<?php echo site_url('seller/main/menu');?>" id="menu-frame" name="menu-frame" frameborder="no" scrolling="yes">
-    <frame src="<?php echo site_url('seller/main/drag');?>" id="drag-frame" name="drag-frame" frameborder="no" scrolling="no">
-    <frame src="<?php echo site_url('seller/main/content');?>" id="main-frame" name="main-frame" frameborder="no" scrolling="yes">
-  </frameset>
-</frameset>
-  <frameset rows="0, 0" framespacing="0" border="0">
-  <frame src="http://api.ecshop.com/record.php?mod=login&url={$shop_url}" id="hidd-frame" name="hidd-frame" frameborder="no" scrolling="no">
-  </frameset>
-</head>
+	
+    	
+   <div class="myheading">
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+    	<div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">
+                
+                </a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+              <ul class="nav navbar-nav">
+                	<li><a href="#">Back to Home</a></li>
+                  <li><a href="#">About</a></li>
+              </ul>
+             <?php $user=$this->session->userdata('email')?>
+              <div class="btn-group navbar-btn navbar-right">
+  					       <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"> <?=$user?> <span class="caret"></span>
+  					</button>
+					         <ul class="dropdown-menu" role="menu">
+                        <li><a href="#">Action</a></li>
+                        <li><a href="#">Another action</a></li>
+                        <li><a href="#">Something else here</a></li>
+                        <li class="divider"></li>
+                        <li><a href="#">Separated link</a></li>
+                     </ul>
+                  </div>
+                <form class="navbar-form navbar-right">
+            		<input type="text" class="form-control" placeholder="Search...">
+          		</form>
+             </div>
+          </div>
+    	</nav>
+    </div>
+    
+	<div class="container-fluid">
+  		<div class="row">
+        	<div class="col-md-2">
+            <div class = "sidebar">
+            	<ul class="nav">
+                	<li class="active"><a href="#add" data-toggle="tab">Add New Commodity</a></li>
+              		<li><a href="#list" data-toggle="tab">List Commodity</a></li>
+                  <li><a href="#type" data-toggle="tab">Type Management</a></li>
+              		<li><a href="#attribute" data-toggle="tab">Attribute Management</a></li>
+                  <li><a href="#customer" data-toggle="tab">Customer Management</a></li>
+              		<li><a href="#seller" data-toggle="tab">Seller Management</a></li>
+                  <li><a href="#commodity" data-toggle="tab">Commodity Management</a></li>
+                  <li><a href="#order" data-toggle="tab">Order Management</a></li>
+              		<li><a href="#comment" data-toggle="tab">Comment Management</a></li>
+              		<li><a href="#complain" data-toggle="tab">Complain Management</a></li>
+          		</ul>
+            </div>
+          </div>
+            <div class="col-md-10">
+              <div class="tab-content">
+                  <div class="tab-pane active" id="add">
+                    <iframe frameborder="0" src="<?=site_url("seller/commodity/add_comm")?>" width="100%" height="850px">
+                    </iframe>
+                  </div>
+                  <div class="tab-pane" id="list">
+                    <iframe frameborder="0" src="<?=site_url("seller/commodity/list_comm")?>" width="100%" height="850px"></iframe>
+                  </div>
+                  <div class="tab-pane" id="type">
+                    <iframe frameborder="0" src="<?=site_url("admin/goodstype")?>" width="100%" height="850px"></iframe>
+                  </div>
+                  <div class="tab-pane" id="attribute">
+                    <iframe frameborder="0" src="<?=site_url("admin/attribute")?>" width="100%" height="850px"></iframe>
+                  </div>
+                  <div class="tab-pane" id="customer">4</div>
+                  <div class="tab-pane" id="seller">5</div>
+                  <div class="tab-pane" id="commodity">6</div>
+                  <div class="tab-pane" id="order">7</div>
+                  <div class="tab-pane" id="comment">8</div>
+                  <div class="tab-pane" id="complain">9</div>
+              </div>
+            </div>
+
+        </div>
+	</div>
+    <script src="<?=base_url("src/js/jquery.min.js")?>"></script>
+    <script src="<?=base_url("src/js/bootstrap.min.js")?>"></script>
 </html>

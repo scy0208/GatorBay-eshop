@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="<?=base_url("src/styles/bootstrap.min.css")?>">
+    <link rel="stylesheet" href="<?=base_url("src/styles/dashboard.css")?>">
+    <title>Admin Dashbord</title>
+    <script src="<?=base_url("src/js/jquery.min.js")?>"></script>
+    <script src="<?=base_url("src/js/bootstrap.min.js")?>"></script>
+    <script src="//cdn.ckeditor.com/4.4.7/full/ckeditor.js"></script>
+    <script src="<?=base_url("ckeditor_1/ckeditor.js")?>"></script>
+ </head>
+
+
+
+	<form action="<?php echo site_url('seller/commodity/insert')?>" method="post" enctype="multipart/form-data">
+		<div class="row">
+			<div class="col-md-9">
+				<div class="media">
+				  <div class="media-left">
+				      <img class="media-object" src="<?=base_url("src/images/add-icon.png")?>" width="64px" length="64px">
+				  </div>
+				  <div class="media-body">
+				    <h3 class="media-heading">Add New Commodity</h3>
+				    Add a new commodity here
+				  </div>
+				</div>
+			</div>
+			<div class="col-md-2">
+				<button type="submit" class="btn btn-primary">Submit</button>
+				<button type="reset" class="btn btn-danger">Reset</button>
+			</div>
+		</div>
+		
+		<ul class="nav nav-tabs">
+			<li class="active"><a href="#basic" data-toggle="tab">Basic Information</a></li>
+			<li><a href="#description" data-toggle="tab">Commodity Description</a></li>
+			<li><a href="#attribute" data-toggle="tab">Attribute Information</a></li>
+			<li><a href="#photo" data-toggle="tab">Photo</a></li>
+		</ul>
+
+		<div class="tab-content container" height="700px">
+			<div class="tab-pane active" id="basic">
+				<div class="form-group">
+					<lable for="goods_name">Commodity Name: </lable>
+					<input type="text" name="goods_name" id="goods_name" class="form-control">
+				</div>
+				<div class="form-group">
+					<lable for="brand_id">Brand Name: </lable>
+					<select class="form-control" name="brand_id" id="brand_id">
+						<?php foreach($brands as $brand) :?>
+							<option value= "<?php echo $brand['brand_id'] ;?>">
+								<?php echo $brand['brand_name']?>
+							</option>
+						<?php endforeach?>  
+					</select>
+				</div>
+				<div class="form-group">
+					<lable for="cat_id">Category Name: </lable>
+					<select class="form-control" name="cat_id" id="cat_id">
+						<?php foreach($cates as $cate) :?>
+							<option value= "<?php echo $cate['cat_id'] ;?>">
+								<?php echo str_repeat('&nbsp;&nbsp;&nbsp;&nbsp;',$cate['level']).$cate['cat_name']?>
+						<?php endforeach?>  
+					</select>
+				</div>	
+				<div class="form-group">
+					<lable for="shop_price">Shop Price: </lable>
+					<input type="text" class="form-control" name="shop_price" id="shop_price">
+				</div>
+				<div class="form-group">
+					<lable for="market_price">Market Price: </lable>
+					<input type="text" class="form-control" name="market_price" id="market_price">
+				</div>
+				<div class="form-group">
+					<lable for="market_price">Number: </lable>
+					<input type="text" class="form-control" name="goods_number" id="goods_number">
+				</div>
+				<div class="form-group">
+					<label class="radio-inline">
+						<input type="radio" name="is_onsale" id="is_onsale" value="1" checked="true"> On sale
+					</label>
+					<label class="radio-inline">
+						<input type="radio" name="is_onsale" id="is_onsale" value="0">  No on sale
+					</label>
+				</div>
+				<div class="form-group">
+				    <label for="goods_img">Image input</label>
+				    <input type="file" id="goods_img" name="goods_img" >
+				    <p class="help-block">Upload your commodity image here</p>
+				</div>
+		
+			</div>
+				 
+			<div class="tab-pane" id="description">
+				<textarea rows="100" cols="100" name="goods_desc" id="goods_desc" class="ckeditor"></textarea>
+			</div>
+
+			<div class="tab-pane container" id="attribute">
+				<div class="form-group">
+					<label for="type_id">Type:</label>
+					<select class="form-control" name="type_id" id="type_id">
+						<?php foreach($types as $type) :?>
+							<option value= "<?php echo $type['type_id'] ;?>">
+								<?php echo $type['type_name']?>
+							</option>
+						<?php endforeach?>  
+					</select>
+				</div>
+				<div class="container" id="content">
+				</div>
+			</div>
+			<div class="tab-pane" id="photo">
+				
+			</div>
+		</div>
+	</form>
+
+
+<script>
+	$("#type_id").change(function(){
+		var url = "<?php echo site_url('seller/commodity/create_attr_html');?>";
+		$.get(url,{"type_id":this.value},function(data){
+			$("#content").html(data);
+		});
+	});
+</script>
+

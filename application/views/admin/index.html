@@ -26,8 +26,9 @@
                     <li><a href="#">About</a></li>
                 </ul>
                 <div class="btn-group navbar-btn navbar-right">
+                <?php $user=$this->session->userdata('email')?>
   					<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-    					scy0208 <span class="caret"></span>
+    					<?=$user?> <span class="caret"></span>
   					</button>
 					         <ul class="dropdown-menu" role="menu">
                         <li><a href="#">Action</a></li>

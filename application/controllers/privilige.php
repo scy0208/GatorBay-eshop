@@ -11,7 +11,7 @@ class Privilige extends CI_Controller
 	}
 	public function login()
 	{ 
-		$this->load->view('seller/login.html');
+		$this->load->view('login.html');
 	}
 
 
@@ -39,10 +39,11 @@ class Privilige extends CI_Controller
 
 		if ($this->form_validation->run() == false)
 		{
+			$data['type'] = '0';
 			$data['message'] = validation_errors();
 			$data['url'] = site_url('privilige/login');
 			$data['wait'] = 3;
-			$this->load->view('seller/message.html',$data);
+			$this->load->view('message.html',$data);
 		} 
 		else
 		{
@@ -57,22 +58,26 @@ class Privilige extends CI_Controller
 
 				if($this->user_model->check_identity($usertype,$email,$password))
 				{
+					$user_info = array('usertype' => $usertype, 'email' => $email);
+					$this->session->set_userdata($user_info);
 					redirect($usertype."/main/index");
 				}
 				else
 				{
+					$data['type'] = '0';
 					$data['url'] = site_url('privilige/login');
 					$data['message'] = 'Invalid Email or Password';
 					$data['wait'] = 3;
-					$this->load->view('seller/message.html',$data);
+					$this->load->view('message.html',$data);
 				}
 			}
 			else
 			{
+				$data['type'] = '0';
 				$data['url'] = site_url('privilige/login');
 				$data['message'] = 'Wrong Verification Code';
 				$data['wait'] = 3;
-				$this->load->view('seller/message.html',$data);
+				$this->load->view('message.html',$data);
 			}
 
 		}

@@ -14,4 +14,12 @@ class Attribute_model extends CI_Model
 		$query = $this->db->query("select * from ".self::TBL_ATTR);
 		return $query->result_array();
 	}
+
+	public function get_attr($type_id)
+	{
+		$query=$this->db->query("select * from ".self::TBL_ATTR." where type_id='".$type_id."'");
+		return $query->result_array();
+	}
+
+	
 }

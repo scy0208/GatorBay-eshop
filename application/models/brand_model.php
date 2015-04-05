@@ -21,4 +21,6 @@ class Brand_model extends CI_Model
 	{
 		return $this->db->query("delete from ".self::TBL_BRAND." where brand_id = '".$brand_id."'");
 	}
+
+	
 }
