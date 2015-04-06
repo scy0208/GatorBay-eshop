@@ -82,8 +82,8 @@
 		</div>
 
 		<div class="form-group">
-			<label for="attr_value">Selectable choice value (seperate by enter):</label>
-			<textarea class="form-control" name="attr_value" id="attr_value"  rows="4" placeholder="Enter the selectable choice value here, seperate by enter" disabled>
+			<label for="attr_values">Selectable choice value (seperate by enter):</label>
+			<textarea class="form-control" name="attr_values" id="attr_values"  rows="4" placeholder="Enter the selectable choice value here, seperate by enter" disabled>
 			</textarea>
 		</div>
 
@@ -94,7 +94,7 @@
 	<script>
 		function radioClicked(n)
 		{
-			document.forms['theForm'].elements['attr_value'].disabled = (n >0)? false : true;
+			document.forms['theForm'].elements['attr_values'].disabled = (n >0)? false : true;
 		}
 	</script>
 

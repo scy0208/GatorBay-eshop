@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="<?=base_url("src/styles/bootstrap.min.css")?>">
+    <link rel="stylesheet" href="<?=base_url("src/styles/dashboard.css")?>">
+    <title>Seller Dashbord</title>
+    <script src="<?=base_url("src/js/jquery.min.js")?>"></script>
+    <script src="<?=base_url("src/js/bootstrap.min.js")?>"></script>
+    <script src="<?=base_url("ckeditor/ckeditor.js")?>"></script>
+ </head>
+
+ <form action="<?php echo site_url('seller/commodity/update_comm/'.$item['goods_id'])?>" method="post" enctype="multipart/form-data">
+        <div class="row">
+            <div class="col-md-9">
+                <div class="media">
+                  <div class="media-left">
+                      <img class="media-object" src="<?=base_url("src/images/add-icon.png")?>" width="64px" length="64px">
+                  </div>
+                  <div class="media-body">
+                    <h3 class="media-heading">Edit Commodity</h3>
+                    Edit an existed commodity here
+                  </div>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <button type="submit" class="btn btn-primary">Submit</button>
+                <a type="button" class="btn btn-success" href="<?=site_url('seller/commodity/list_comm')?>">Return</a>
+            </div>
+        </div>
+        
+        <ul class="nav nav-tabs">
+            <li class="active"><a href="#basic" data-toggle="tab">Basic Information</a></li>
+            <li><a href="#description" data-toggle="tab">Commodity Description</a></li>
+            <li><a href="#attribute" data-toggle="tab">Attribute Information</a></li>
+            <li><a href="#photo" data-toggle="tab">Photo</a></li>
+        </ul>
+
+        <div class="tab-content container" height="700px">
+            <div class="tab-pane active" id="basic">
+                <div class="form-group">
+                    <lable for="goods_name">Commodity Name: </lable>
+                    <input type="text" name="goods_name" id="goods_name" class="form-control" value="<?=$item['goods_name'] ?>">
+                </div>
+                <div class="form-group">
+                    <lable for="brand_id">Brand Name: </lable>
+                    <select class="form-control" name="brand_id" id="brand_id">
+                        <option value= '0'> Choose a brand </option>
+                        <?php foreach($brands as $brand) :?>
+                            <option value= "<?php echo $brand['brand_id'] ;?>"
+                                <?php
+                                    if($brand['brand_id']==$item['brand_id'])
+                                    {
+                                        echo " selected ";
+                                    }
+                                ?>
+                            >
+                                <?php echo $brand['brand_name']?>
+                            </option>
+                        <?php endforeach?>  
+                    </select>
+                </div>
+                <div class="form-group">
+                    <lable for="cat_id">Category Name: </lable>
+                    <select class="form-control" name="cat_id" id="cat_id">
+                        <option value= '0'> Choose a category </option>
+                        <?php foreach($cates as $cate) :?>
+                            <option value= "<?php echo $cate['cat_id'] ;?>"
+                                <?php
+                                    if($cate['cat_id']==$item['cat_id'])
+                                    {
+                                        echo " selected ";
+                                    }
+                                ?>
+                            >
+                                <?php echo str_repeat('&nbsp;&nbsp;&nbsp;&nbsp;',$cate['level']).$cate['cat_name']?>
+                        <?php endforeach?>  
+                    </select>
+                </div>  
+                <div class="form-group">
+                    <lable for="shop_price">Shop Price: </lable>
+                    <input type="text" class="form-control" name="shop_price" id="shop_price" value="<?=$item['shop_price'] ?>">
+                </div>
+                <div class="form-group">
+                    <lable for="market_price">Market Price: </lable>
+                    <input type="text" class="form-control" name="market_price" id="market_price" value="<?=$item['market_price']?>">
+                </div>
+                <div class="form-group">
+                    <lable for="goods_number">Number: </lable>
+                    <input type="text" class="form-control" name="goods_number" id="goods_number" value="<?=$item['goods_number']?>">
+                </div>
+                <div class="form-group">
+                    <label class="radio-inline">
+                        <input type="radio" name="is_onsale" id="is_onsale" value="1" 
+                            <?php
+                                    if($item['is_onsale']=='1')
+                                    {
+                                        echo " checked='true' ";
+                                    }
+                            ?>
+
+                        > On sale
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="is_onsale" id="is_onsale" value="0"
+                            <?php
+                                    if($item['is_onsale']=='0')
+                                    {
+                                        echo " checked='true' ";
+                                    }
+                            ?>
+
+                        >  No on sale
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label for="goods_img">Image input</label>
+                    <input type="file" id="goods_img" name="goods_img" >
+                    <p class="help-block">Upload your commodity image here</p>
+                </div>
+        
+            </div>
+                 
+            <div class="tab-pane" id="description">
+                <textarea rows="100" cols="100" name="goods_desc" id="goods_desc" class="ckeditor">
+                    <?php echo $item['goods_desc'] ?>
+                </textarea>
+            </div>
+
+            <div class="tab-pane container" id="attribute">
+                <div class="form-group">
+                    <label for="type_id">Type:</label>
+                    <select class="form-control" name="type_id" id="type_id">
+                        <option value='0'> Choose a type </option>
+                        <?php foreach($types as $type) :?>
+                            <option value= "<?php echo $type['type_id'] ;?>"
+                                <?php
+                                    if($item['type_id']==$type['type_id'])
+                                    {
+                                        echo " selected ";
+                                    }
+                                ?>
+
+
+                            >
+                                <?php echo $type['type_name']?>
+                            </option>
+                        <?php endforeach?>  
+                    </select>
+                </div>
+
+                <div class="container" id="content">
+                    <?php 
+
+                    foreach($attrs as $attr) :
+                         echo "<div class='form-group'>";
+                         echo "<label>".$attr['attr_name']."</label>";
+                         echo "<input class='form-control' type='hidden' name='attr_id_list[]' id='attr_id_list[]' value='".$attr['attr_id']."'>";
+                         switch ($attr['attr_input_type']) {
+                            case '0':
+                                echo "<input class='form-control' type='text' name='attr_value_list[]' id='attr_value_list[]'  value='".$attr['attr_value']."' >";
+                                break;
+                            case '1':
+                                $choices=explode(PHP_EOL, $attr['attr_values']);
+                                echo "<select class='form-control' name='attr_value_list[]' id='attr_value_list[]' >";
+                                    foreach($choices as $choice):
+                                        echo "<option value='".$choice."'";
+                                        if($choice==$attr['attr_value'])
+                                        {
+                                            echo " selected ";
+                                        }
+
+                                        echo ">".$choice."</option>";
+                                    endforeach;
+                                echo "</select>";
+                                break;
+                            case '2':
+                                echo "<textarea class='form-control' name='attr_value_list[]' id='attr_value_list[]' >".$attr['attr_value']."</textarea>";
+                                break;          
+                            default:
+                                # code...
+                                break;
+                        }
+                        echo "</div>";
+                    endforeach;
+
+                ?>
+
+            
+                </div>
+            </div>
+            <div class="tab-pane" id="photo">
+                
+            </div>
+        </div>
+    </form>
+
+
+<script>
+    $("#type_id").change(function(){
+        var url = "<?php echo site_url('seller/commodity/create_attr_html');?>";
+        $.get(url,{"type_id":this.value},function(data){
+            $("#content").html(data);
+        });
+    });
+</script>
+
+

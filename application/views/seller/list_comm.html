@@ -47,7 +47,7 @@
 			<?php foreach($goods as $good) :?>
 				<tr>
 					<td>
-						<img src="<?php echo base_url("src/commodity/main/".$good['goods_id'].".png");?>" width="120px" length="120px">
+						<img src="<?php echo base_url("src/commodity/main/".$good['goods_id'].".jpg");?>" width="120px" length="120px">
 						</img>
 					</td>
 					<td><?php echo $good['goods_name']?></td>
@@ -59,8 +59,8 @@
 					<td><?php echo $good['goods_number']?></td>
 					<td><?php echo $good['trade']?></td>
 					<td>
-						<a href="<?php echo site_url("admin/brand/delete/".$good['goods_id'])?>">Remove</a> |
-						<a href="<?php echo site_url("admin/brand/edit/".$good['goods_id'])?>">Edit</a> 
+						<a href="<?php echo site_url("seller/commodity/delete_comm/".$good['goods_id'])?>">Remove</a> |
+						<a href="<?php echo site_url("seller/commodity/edit_comm/".$good['goods_id'])?>">Edit</a> 
 					</td>
 				</tr>
 			<?php endforeach;?>

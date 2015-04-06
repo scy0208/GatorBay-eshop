@@ -7,11 +7,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="<?=base_url("src/styles/bootstrap.min.css")?>">
     <link rel="stylesheet" href="<?=base_url("src/styles/dashboard.css")?>">
-    <title>Admin Dashbord</title>
+    <title>Seller Dashbord</title>
     <script src="<?=base_url("src/js/jquery.min.js")?>"></script>
     <script src="<?=base_url("src/js/bootstrap.min.js")?>"></script>
-    <script src="//cdn.ckeditor.com/4.4.7/full/ckeditor.js"></script>
-    <script src="<?=base_url("ckeditor_1/ckeditor.js")?>"></script>
+    <script src="<?=base_url("ckeditor/ckeditor.js")?>"></script>
  </head>
 
 
@@ -51,6 +50,7 @@
 				<div class="form-group">
 					<lable for="brand_id">Brand Name: </lable>
 					<select class="form-control" name="brand_id" id="brand_id">
+						<option value= '0'>	Choose a brand </option>
 						<?php foreach($brands as $brand) :?>
 							<option value= "<?php echo $brand['brand_id'] ;?>">
 								<?php echo $brand['brand_name']?>
@@ -61,6 +61,7 @@
 				<div class="form-group">
 					<lable for="cat_id">Category Name: </lable>
 					<select class="form-control" name="cat_id" id="cat_id">
+						<option value= '0'>	Choose a category </option>
 						<?php foreach($cates as $cate) :?>
 							<option value= "<?php echo $cate['cat_id'] ;?>">
 								<?php echo str_repeat('&nbsp;&nbsp;&nbsp;&nbsp;',$cate['level']).$cate['cat_name']?>
@@ -103,6 +104,7 @@
 				<div class="form-group">
 					<label for="type_id">Type:</label>
 					<select class="form-control" name="type_id" id="type_id">
+						<option value='0'> Choose a type </option>
 						<?php foreach($types as $type) :?>
 							<option value= "<?php echo $type['type_id'] ;?>">
 								<?php echo $type['type_name']?>

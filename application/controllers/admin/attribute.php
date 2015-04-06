@@ -39,7 +39,7 @@ class Attribute extends CI_Controller
 			$data['type_id']=$this->input->post('type_id');
 			$data['attr_type']=$this->input->post('attr_type',true);
 			$data['attr_input_type']=$this->input->post('attr_input_type',true);
-			$data['attr_value']=$this->input->post('attr_value');
+			$data['attr_values']=$this->input->post('attr_values');
 			$data['sort_order']=$this->input->post('sort_order',true);
 			if($this->attribute_model->insert_attr($data))
 			{
