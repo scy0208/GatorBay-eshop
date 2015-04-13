@@ -1,6 +1,6 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Commodity extends CI_Controller
+class Commodity extends Seller_Controller
 {
 	public function __construct()
 	{
@@ -104,6 +104,7 @@ class Commodity extends CI_Controller
 					$config['allowed_types']='gif|png|jpg';
 					$config['file_name']=$result['max(goods_id)'];
 					$config['max_size']=1000;
+
 					$this->load->library('upload',$config);
 					$this->upload->do_upload('goods_img');
 					$attr_ids=$this->input->post('attr_id_list');
@@ -152,10 +153,9 @@ class Commodity extends CI_Controller
 
 	public function delete_comm($goods_id)	
 	{
-		$this->load->helper('file');
 		if($this->commodity_model->delete_comm($goods_id))
 		{
-			delete_files('./src/commodity/main/'.$goods_id.'.jpg');
+			unlink('./src/commodity/main/'.$goods_id.'.jpg');
 			$data['type'] = "1";
 			$data['message'] = "Delete Successful";
 			$data['wait']=3;
@@ -180,7 +180,7 @@ class Commodity extends CI_Controller
 		$data['types']=$this->goodstype_model->get_all_type();
 		$data['cates']=$this->category_model->list_cate();
 		$data['brands']=$this->brand_model->list_brand();
-		$data['attrs']=$this->attribute_model->join_attr($data['item']['type_id']);
+		$data['attrs']=$this->attribute_model->join_attr($data['item']['type_id'],$data['item']['goods_id']);
 
 		$this->load->view('seller/edit_comm.html',$data);
 
@@ -214,7 +214,7 @@ class Commodity extends CI_Controller
 				$data['goods_number']=$this->input->post('goods_number',true);
 				$data['is_onsale']=$this->input->post('is_onsale',true);
 				$data['seller_id']=$this->session->userdata('email');
-				$data['add_time']=date('y-m-d h:i:s',time());
+				$data['add_time']=date('Y-m-d h:i:s',time());
 				$result=$this->commodity_model->update_comm($data);
 				if(!$result)
 				{
@@ -227,7 +227,7 @@ class Commodity extends CI_Controller
 				else
 				{
 					$config['upload_path']="./src/commodity/main/";
-					$config['allowed_types']='gif|png|jpg';
+					$config['allowed_types']='jpg';
 					$config['file_name']=$goods_id;
 					$config['max_size']=1000;
 					$this->load->library('upload',$config);
@@ -269,14 +269,21 @@ class Commodity extends CI_Controller
 
 public function test()
 {
-	$data['goods_id']='23';
-	$data['attr_id']='2';
-	$result = $this->commodity_model->find_goods_attr($data);
-	//if(empty($result))
-	//	echo "yes";
-	var_dump($result);
+	//$data1=$this->category_model->display_cate(48);
+	$data2=$this->category_model->display_cate(48,2);
+	//$data3=$this->__recursion(10,0);
+	var_dump($data2);
 }
 
+private function __recursion($setting,$input)
+{
+	if($input<=$setting)
+	{
+		echo $input." , ";
+		$this->__recursion($setting, $input+1);
+	}
+	return $input;
+}
 
 
 

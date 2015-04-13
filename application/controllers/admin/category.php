@@ -1,6 +1,6 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Category extends CI_Controller
+class Category extends Admin_Controller
 {
 	public function __construct()
 	{
@@ -128,6 +128,20 @@ class Category extends CI_Controller
 		}
 
 
+	}
+
+	public function test()
+	{
+		$query = $this->db->query("select * from ci_category");
+		$cates = $query->row_array();
+		//foreach($cates as $index=>$cate):
+		//	foreach($cate as $key=>$value):
+		//		$new_key=strtolower($key);
+		//		$new_cate[$new_key]=$value;
+		//	endforeach;
+		//	$new_cates[]=$new_cate;
+		//endforeach;
+		var_dump($cates);
 	}
 
 }

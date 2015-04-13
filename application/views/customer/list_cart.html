@@ -7,27 +7,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="<?=base_url("src/styles/bootstrap.min.css")?>">
     <link rel="stylesheet" href="<?=base_url("src/styles/dashboard.css")?>">
-    <title>Seller Dashbord</title>
+    <title>Customer Dashbord</title>
  </head>
 
 <div class="row">
 	<div class="col-md-9">
 		<div class="media">
 		  <div class="media-left">
-		      <img class="media-object" src="<?=base_url("src/images/listcomm-icon.png")?>" width="64px" length="64px">
+		      <img class="media-object" src="<?=base_url("src/images/cart-icon.png")?>" width="64px" length="64px">
 		  </div>
 		  <div class="media-body">
-		    <h3 class="media-heading">Commodity List</h3>
+		    <h3 class="media-heading"> Your Cart </h3>
 		    All of your commodities are list here
 		  </div>
 		</div>
 	</div>
-	<div class="col-md-2">
+	<!--<div class="col-md-2">
 		<a type="button" class="btn btn-primary pull-right" href="<?=site_url("seller/commodity/add_comm")?>">
 			Add New Commodity
 		</a>
-	</div>
+	</div>-->
 </div>
+
 
 <div class="comtainer">
 	<table class="table">
@@ -37,9 +38,9 @@
 				<th>Commodity Thumb</th>
 				<th>Commodity Name</th>
 				<th>Price</th>
-				<th>On Sale</th>
-				<th>Stock</th>
-				<th>Sales Volume</th>
+				<th>Number</th>
+				<th>Seller</th>
+				<th></th>
 				<th>Operation</th>
 			</tr>
 		</thead>
@@ -52,18 +53,14 @@
 					</td>
 					<td><?php echo $good['goods_name']?></td>
 					<td><?php echo $good['shop_price']?></a></td>					
+					
+					<td><?php echo $good['number']?></td>
+					<td><?php echo $good['seller_id']?></td>
+					<td><a type="button" class="btn btn-primary" herf="<?=site_url("customer/checkout/check_alone/".$good['goods_id'])?>" >Check Out</a></td>
 					<td>
-						<img src="<?php echo base_url("src/images/message_").$good['is_onsale'].".png";?>" width="20px" height="20px">
-						</img>
-					</td>
-					<td><?php echo $good['goods_number']?></td>
-					<td><?php echo $good['trade']?></td>
-					<td>
-						<a href="<?php echo site_url("seller/commodity/delete_comm/".$good['goods_id'])?>">Remove</a> |
-						<a href="<?php echo site_url("seller/commodity/edit_comm/".$good['goods_id'])?>">Edit</a> 
+						<a href="<?php echo site_url("customer/cart/delete_comm/".$good['goods_id'])?>">Remove</a> |
+						<a href="<?php echo site_url("customer/cart/edit_comm/".$good['goods_id'])?>">Edit</a> 
 					</td>
 				</tr>
 			<?php endforeach;?>
 		</tbody>
-	</table>
-</div>

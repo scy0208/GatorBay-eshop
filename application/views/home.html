@@ -1,0 +1,131 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="<?=base_url("src/styles/bootstrap.min.css")?>">
+    <link rel="stylesheet" href="<?=base_url("src/styles/dashboard.css")?>">
+    <link rel="stylesheet" href="<?=base_url("src/styles/main.css")?>">
+    <script src="<?=base_url("src/js/jquery.min.js")?>"></script>
+    <script src="<?=base_url("src/js/bootstrap.min.js")?>"></script>
+    <title>Gataor Bay Eshop</title>
+ </head> 
+
+<body class="bg">
+
+   <div class="jumbotron">
+      <center>
+         <h1> GatorBay </h1>
+         <p> A powerful C2C online shopping center for gators </p>
+         <a type="button" class="btn btn-lg btn-primary" href="<?=site_url('seller/commodity/list_comm')?>">CREAT ACCOUNT</a><br/>
+
+      </center>
+   </div>
+<div class="wrapper">
+  <div class="myheading">
+    <nav class="navbar navbar-default">
+      <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">
+                
+                </a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+              <ul class="nav navbar-nav">
+                  <li><a href="#">Back to Home</a></li>
+                  <li><a href="#">About</a></li>
+              </ul>
+             <?php $user=$this->session->userdata('email');
+             $usertype=$this->session->userdata('usertype')?>
+              <div class="btn-group navbar-btn navbar-right">
+                      <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"> <?php echo $usertype." : ".$user?> <span class="caret"></span>
+               </button>
+                        <ul class="dropdown-menu" role="menu">
+                        <li><a href="#">Action</a></li>
+                        <li><a href="#">Another action</a></li>
+                        <li><a href="#">Something else here</a></li>
+                        <li class="divider"></li>
+                        <li><a href="<?php echo site_url('privilige/login')?>">Sign out</a></li>
+                     </ul>
+                  </div>
+                <form class="navbar-form navbar-right">
+                  <input type="text" class="form-control" placeholder="Search...">
+               </form>
+             </div>
+          </div>
+      </nav>
+    </div>
+
+<body data-spy="scroll" data-target="#myScrollspy">
+<div class="container-mainpage">
+  <div class="row">
+    <div class="col-md-3" id="myScrollspy">
+      <div class="panel-group" id="accordion">
+
+        <ul class="nav nav-tabs-scroll nav-stacked" data-spy="affix" data-offset-top="100">
+          <li class="active"><a herf="#new">New Product Release</a></li>
+          <?php foreach($catalogs as $catalog) :?>
+           <li><a href="<?php echo '#'.'catalog'.$catalog['cat_id']?>"><?=$catalog['cat_name']?></a></li>
+          <?php endforeach;?>
+        </ul>
+      </div>
+    </div>
+    <div class="col-md-9">
+        <h2 id="new">New Product Release</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eu sem tempor, varius quam at, luctus dui. Mauris magna metus, dapibus nec turpis vel, semper malesuada ante. Vestibulum id metus ac nisl bibendum scelerisque non non purus. Suspendisse varius nibh non aliquet sagittis. In tincidunt orci sit amet elementum vestibulum. Vivamus fermentum in arcu in aliquam. Quisque aliquam porta odio in fringilla. Vivamus nisl leo, blandit at bibendum eu, tristique eget risus. Integer aliquet quam ut elit suscipit, id interdum neque porttitor. Integer faucibus ligula.</p>
+            <p>Vestibulum quis quam ut magna consequat faucibus. Pellentesque eget nisi a mi suscipit tincidunt. Ut tempus dictum risus. Pellentesque viverra sagittis quam at mattis. Suspendisse potenti. Aliquam sit amet gravida nibh, facilisis gravida odio. Phasellus auctor velit at lacus blandit, commodo iaculis justo viverra. Etiam vitae est arcu. Mauris vel congue dolor. Aliquam eget mi mi. Fusce quam tortor, commodo ac dui quis, bibendum viverra erat. Maecenas mattis lectus enim, quis tincidunt dui molestie euismod. Curabitur et diam tristique, accumsan nunc eu, hendrerit tellus.</p>
+            <hr>
+      <?php foreach($catalogs as $key=>$catalog) :?>
+        <h2 id="<?php echo 'catalog'.$catalog['cat_id']?>"><?=$catalog['cat_name']?></h2>
+        
+        <ul class="nav nav-tabs">
+          <?php foreach($lists[$key]['children']as $num=>$cates) :?>
+              <li 
+                <?php if($num==0) echo " class='active' " ?>
+              ><a href="<?php echo '#'.'category'.$cates['cate']['cat_id']?>" data-toggle="tab"><?=$cates['cate']['cat_name']?></a></li>
+          <?php endforeach;?>
+        </ul>
+
+        <div class="tab-content" height="700px">
+          <?php foreach($lists[$key]['children']as $num=>$cates) :?>
+            <div class="<?php if($num==0) echo 'tab-pane active'; else echo 'tab-pane'?>" 
+            id="<?php echo 'category'.$cates['cate']['cat_id']?>">
+              
+                <div class="row">
+                <?php foreach($cates['goods'] as $goods) :?>
+                  <div class="col-xs-6 col-md-3">
+                  <a href="<?=site_url('home/detail/'.$goods['goods_id'])?>">
+                    <div class="thumbnail">
+                      <img src="<?=base_url('src/commodity/main/'.$goods['goods_id'].'.jpg')?>" weight="100px" height="80px" alt="...">
+                      <div class="caption">
+                      <p><?=$goods['goods_name']?></p>
+                      <p><?=$goods['shop_price']?></p>
+                    </div> 
+                    </div>
+                    </a>
+                  </div>
+                  <?php endforeach;?>
+                </div>             
+          
+            </div>
+          <?php endforeach;?>
+          </div>    
+          
+      <?php endforeach;?>
+    </div>
+  </div>
+</div>
+</body>
+
+
+
+
+
+
+
+</div>
+</body>
+

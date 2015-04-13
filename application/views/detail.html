@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="<?=base_url("src/styles/bootstrap.min.css")?>">
+    <link rel="stylesheet" href="<?=base_url("src/styles/dashboard.css")?>">
+    <link rel="stylesheet" href="<?=base_url("src/styles/main.css")?>">
+    <style type="text/css">
+    .main-container{
+      margin-top: 3%;
+      margin-left: 15%;
+      margin-right: 15%;
+
+
+
+    }
+
+    </style>
+    <script src="<?=base_url("src/js/jquery.min.js")?>"></script>
+    <script src="<?=base_url("src/js/bootstrap.min.js")?>"></script>
+    <title>Gataor Bay Eshop</title>
+ </head> 
+
+ <div class="myheading">
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">
+                
+                </a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+              <ul class="nav navbar-nav">
+                  <li><a href="<?php echo site_url('home')?>">Back to Home</a></li>
+                  <li><a href="#">About</a></li>
+              </ul>
+             <?php $user=$this->session->userdata('email');
+             $usertype=$this->session->userdata('usertype')?>
+              <div class="btn-group navbar-btn navbar-right">
+                      <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"> <?php echo $usertype." : ".$user?> <span class="caret"></span>
+               </button>
+                        <ul class="dropdown-menu" role="menu">
+                        <li><a href="#">Action</a></li>
+                        <li><a href="#">Another action</a></li>
+                        <li><a href="#">Something else here</a></li>
+                        <li class="divider"></li>
+                        <li><a href="<?php echo site_url('privilige/login')?>">Sign out</a></li>
+                     </ul>
+                  </div>
+                <form class="navbar-form navbar-right">
+                  <input type="text" class="form-control" placeholder="Search...">
+               </form>
+             </div>
+          </div>
+      </nav>
+    </div>
+
+    <div class="main-container">
+    <div class="media">
+          <div class="media-left">
+              <img class="media-object" src="<?=base_url('src/commodity/main/'.$comm['goods_id'].'.jpg')?>" width="300px" length="300px">
+          </div>
+          <div class="media-body">
+            <h1 class="media-heading"><?php echo $comm['goods_name']?></h1>
+            <h3><?php echo $comm['shop_price']?></h3>
+            <form action="<?php echo site_url('customer/cart/insert')?>" method="post">
+              <input type="hidden" name="goods_id" id= "goods_id" value="<?php echo $comm['goods_id']?>">
+              <input type="hidden" name="user_id" id= "user_id"value="<?php echo $user?>">
+              <div class="form-group">
+                <label for="number">Number:</label>
+                <input type="text" class="form-control" name="number" id="number" value="1">
+              </div>
+
+              <?php 
+                if($user!=NULL&&$usertype=="customer")
+                {
+                  echo "<button type='submit' class='btn btn-lg btn-primary'>Add to cart</button> </form>";
+                }
+                else
+                {
+                  echo "</form> <button class='btn btn-primary btn-lg' data-toggle='modal' data-target='#myModal'>Sign in as a customer</button>";
+                }
+              ?>
+            
+            </form>
+          </div>
+        </div>
+      
+    </div>
+
+
+
+
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" 
+   aria-labelledby="myModalLabel" aria-hidden="true">
+   <div class="modal-dialog">
+      <div class="modal-content">
+         <div class="modal-header">
+            <button type="button" class="close" 
+               data-dismiss="modal" aria-hidden="true">
+                  &times;
+            </button>
+            <h4 class="modal-title" id="myModalLabel">
+               Sign in as a customer
+            </h4>
+         </div>
+         <div class="modal-body">
+            <form class="form-signin" method="post" action="<?php echo site_url('privilige/signin/home');?>">
+                    
+                    <input type="hidden" name="usertype" id="usertype" value="customer">
+                    <input type="text" class="form-control" placeholder="Email" name="email" id="email" required autofocus>
+                    <input type="password" class="form-control" placeholder="Password" name="password" id="password" required>
+
+
+                        <input type="text" class="form-control" name="captcha" id="captcha" placeholder="Enter the code bellow" required>
+                      
+                     <div class="checkbox pull-left">
+                      <label>
+                        <input type="checkbox" value="remember-me"> Remember me
+                      </label>
+                    </div>
+                        
+                    <img  src="<?php echo site_url('privilige/code')?>" alt="CAPTCHA" border="0" onclick= this.src="<?php echo site_url('privilige/code').'/'?>"+Math.random() style="cursor: pointer;" class="pull-right img-thumbnail"/>
+                     
+                    
+                      <button class="btn btn-lg btn-block btn-primary" type="submit" >
+                        Sign in </button>
+                      <button type="button" class="btn btn-lg btn-block btn-default" data-dismiss="modal">Create an account
+                      </button>
+                  
+                </form>
+         </div>
+        
+      </div><!-- /.modal-content -->
+</div><!-- /.modal -->

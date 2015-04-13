@@ -22,9 +22,9 @@ class Attribute_model extends CI_Model
 		return $query->result_array();
 	}
 
-	public function join_attr($type_id)
+	public function join_attr($type_id,$goods_id)
 	{
-		$query=$this->db->query("select a.attr_id as attr_id, attr_name, type_id,attr_type,attr_input_type,attr_value,attr_values,goods_id,goods_attr_id,attr_price from ".self::TBL_ATTR." as a left join ".self::TBL_GA." as b on a.attr_id=b.attr_id where type_id='".$type_id."'");
+		$query=$this->db->query("select a.attr_id as attr_id, attr_name, type_id,attr_type,attr_input_type,attr_value,attr_values,goods_id,goods_attr_id,attr_price from ".self::TBL_ATTR." a left join ".self::TBL_GA." b on a.attr_id=b.attr_id where type_id='".$type_id."' and goods_id='".$goods_id."'");
 		return $query->result_array();
 	}
 }

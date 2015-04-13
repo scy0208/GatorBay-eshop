@@ -11,6 +11,8 @@ class Privilige extends CI_Controller
 	}
 	public function login()
 	{ 
+		$this->session->unset_userdata('email');
+		$this->session->unset_userdata('usertype');
 		$this->load->view('login.html');
 	}
 
@@ -31,9 +33,9 @@ class Privilige extends CI_Controller
 	}
 
 
-	public function signin()
+	public function signin($target="background")
 	{
-
+		//$this->session->sess_destroy();
 		$this->form_validation->set_rules('email','Email','required');
 		$this->form_validation->set_rules('password','Password','required');
 
@@ -54,13 +56,22 @@ class Privilige extends CI_Controller
 			{
 				$usertype = strtolower($this->input->post('usertype'));
 				$email = strtolower($this->input->post('email'));
-				$password = strtolower($this->input->post('password'));
+				$password = $this->input->post('password');
 
 				if($this->user_model->check_identity($usertype,$email,$password))
 				{
 					$user_info = array('usertype' => $usertype, 'email' => $email);
 					$this->session->set_userdata($user_info);
-					redirect($usertype."/main/index");
+					//echo "SUCCESS";
+					if($target=='background')
+					{
+						redirect($usertype.'/main/index');
+					}
+					else
+					{
+						redirect($target);
+					}
+				
 				}
 				else
 				{

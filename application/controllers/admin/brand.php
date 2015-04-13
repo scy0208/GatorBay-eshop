@@ -1,6 +1,6 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Brand extends CI_Controller
+class Brand extends Admin_Controller
 {
 	public function __construct()
 	{

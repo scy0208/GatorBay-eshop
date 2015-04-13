@@ -3,7 +3,7 @@
 class Category_model extends CI_Model
 {
 	const TBL_CATE = "ci_category";
-
+	const TBL_COMM = "ci_commodity";
 	public function select_cate($cat_id)
 	{
 		$query = $this->db->query("select * from ".self::TBL_CATE." where cat_id= '".$cat_id."'");
@@ -15,7 +15,16 @@ class Category_model extends CI_Model
 	{
 		$query = $this->db->query("select * from ".self::TBL_CATE);
 		$cates = $query->result_array();
+
 		return $this->__tree($cates, $pid);
+		
+	}
+
+	public function get_catalog()
+	{
+		$query = $this->db->query("select * from ".self::TBL_CATE." where parent_id='0'");
+		$cates = $query->result_array();
+		return $cates;
 		
 	}
 
@@ -33,6 +42,90 @@ class Category_model extends CI_Model
 
 		}
 		return $tree;
+	}
+
+	public function display_cate($pid, $level_display)
+	{
+		$pbase=$pid;
+		$query = $this->db->query("select * from ".self::TBL_CATE);
+		$cates = $query->result_array();
+		
+		return $this->__level_display($cates,$pid,$level_display,1);
+		//return $cates;		
+	}
+
+	public function __display($arr,$pid=0,$pbase=0)
+	{
+		$data=array();
+		$result['children']=array();
+		static $goods=array();
+		
+		foreach($arr as $v)
+		{
+
+			if($v['parent_id']==$pid)
+			{
+				$data=$v;
+				$temp=$this->__display($arr,$v['cat_id'],$pbase,$goods);
+				$data['children']=$temp['children'];
+				$result['children'][]=$data;
+			}
+		}
+		$querys=$this->db->query("select goods_id, goods_name, shop_price, seller_id from ".self::TBL_COMM." where cat_id='".$pid."'")->result_array();
+		if(!empty($querys))
+		{
+			foreach ($querys as $query)
+			{
+				$goods[]=$query;
+			}
+		}
+		if($pid==$pbase)
+		{
+			$result['goods']=$goods;
+			$goods=NULL;
+		}		
+		return $result;
+	}
+
+	public function __level_display($arr, $pid, $level_display, $level)
+	{
+		$data=array();
+		$result['children']=array();
+		$result['goods']=array();
+		static $goods=array();
+		
+		foreach($arr as $v)
+		{
+
+			if($v['parent_id']==$pid)
+			{
+				$data['cate']=$v;
+				$temp=$this->__level_display($arr, $v['cat_id'],$level_display,$level+1);
+				$data['children']=$temp['children'];
+				$data['goods']=$temp['goods'];
+				$result['children'][]=$data;
+			}
+		}
+		if($level >= $level_display)
+		{
+			
+			$querys=$this->db->query("select goods_id, goods_name, shop_price from ".self::TBL_COMM." where cat_id='".$pid."'")->result_array();
+			if(!empty($querys))
+			{
+				foreach ($querys as $query)
+				{
+					$goods[]=$query;
+				}
+			}
+			if($level==$level_display)
+			{
+				
+				$result['goods']=$goods;
+				$goods=NULL;
+			}
+		}
+		return $result;
+
 	}
 
 	public function insert_cate($data)
@@ -59,5 +152,9 @@ class Category_model extends CI_Model
 	{
 		return $this->db->query("update ".self::TBL_CATE." set cat_name='".$data['cat_name']."', parent_id='".$data['parent_id']."', cat_desc='".$data['cat_desc']."', sort_order='".$data['sort_order']."', unit='".$data['unit']."', is_show='".$data['is_show']."' where cat_id='".$data['cat_id']."'");
 	}
+
+
+
+
 
 }
