@@ -15,6 +15,11 @@ class Privilige extends CI_Controller
 		$this->session->unset_userdata('usertype');
 		$this->load->view('login.html');
 	}
+	public function register()
+	{
+		//echo "Hello";
+		$this->load->view('register.html');
+	}
 
 
 	public function code()
@@ -29,6 +34,57 @@ class Privilige extends CI_Controller
 		imagejpeg($data['image']);
 
 		ImageDestroy($data['image']);
+
+	}
+
+	public function insert()
+	{
+		$this->form_validation->set_rules('email','Email','required');
+		$this->form_validation->set_rules('password','Password','required');
+		$this->form_validation->set_rules('cmpassword','Comfirm Password','required');
+		if ($this->form_validation->run() == false)
+		{
+			$data['type'] = '0';
+			$data['message'] = validation_errors();
+			$data['url'] = site_url('privilige/register');
+			$data['wait'] = 3;
+			$this->load->view('message.html',$data);
+		} 
+		else
+		{
+			$usertype = strtolower($this->input->post('usertype'));
+			$email = strtolower($this->input->post('email'));
+			$password = $this->input->post('password');
+			$cmpassword = $this->input->post('cmpassword');
+			if($password==$cmpassword)
+			{
+				if($this->user_model->insert_user($usertype,$email,$password))
+				{
+					$data['type'] = '1';
+					$data['message'] = "Insert Successful";
+					$data['url'] = site_url('privilige/login');
+					$data['wait'] = 2;
+					$this->load->view('message.html',$data);
+				}
+				else
+				{
+					$data['type'] = '0';
+					$data['message'] = "Password Comfirm Error";
+					$data['url'] = site_url('privilige/register');
+					$data['wait'] = 3;
+					$this->load->view('message.html',$data);
+				}
+			}
+			else
+			{
+				$data['type'] = '0';
+				$data['message'] = "Insert Error";
+				$data['url'] = site_url('privilige/register');
+				$data['wait'] = 3;
+				$this->load->view('message.html',$data);
+			}
+		}
+
 
 	}
 

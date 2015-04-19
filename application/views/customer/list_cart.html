@@ -54,9 +54,9 @@
 					<td><?php echo $good['goods_name']?></td>
 					<td><?php echo $good['shop_price']?></a></td>					
 					
-					<td><?php echo $good['number']?></td>
+					<td><?php echo $good['num']?></td>
 					<td><?php echo $good['seller_id']?></td>
-					<td><a type="button" class="btn btn-primary" herf="<?=site_url("customer/checkout/check_alone/".$good['goods_id'])?>" >Check Out</a></td>
+					<td><a class="btn btn-primary" href="<?php echo site_url("customer/order/check_alone/".$good['goods_id']."/".$good['num'])?>" >Check Out</a></td>
 					<td>
 						<a href="<?php echo site_url("customer/cart/delete_comm/".$good['goods_id'])?>">Remove</a> |
 						<a href="<?php echo site_url("customer/cart/edit_comm/".$good['goods_id'])?>">Edit</a> 

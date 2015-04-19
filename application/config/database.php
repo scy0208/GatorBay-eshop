@@ -46,7 +46,7 @@
 */
 
 #$active_group = 'test';
-$active_group = 'test';
+$active_group = 'default';
 $active_record = TRUE;
 
 $db['default']['hostname'] = 'oracle.cise.ufl.edu:1521/orcl';

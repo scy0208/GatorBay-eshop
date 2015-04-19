@@ -15,10 +15,12 @@ class Commodity extends Seller_Controller
 	public function index()
 	{		
 		$user=$this->session->userdata('email');
-		$data['goods']=$this->commodity_model->list_comm($user);
+		$data['goods']=$this->commodity_model->list_comm_complex();
 		$this->load->view('seller/list_comm.html',$data);
 		#echo site_url('seller/top');
 	}
+
+
 	public function add_comm()
 	{		
 		$data['types']=$this->goodstype_model->get_all_type();
@@ -88,7 +90,7 @@ class Commodity extends Seller_Controller
 				$data['goods_number']=$this->input->post('goods_number',true);
 				$data['is_onsale']=$this->input->post('is_onsale',true);
 				$data['seller_id']=$this->session->userdata('email');
-				$data['add_time']=date('y-m-d h:i:s',time());
+				$data['add_time']=date('Y-m-d h:i:s',time());
 				$result=$this->commodity_model->insert_comm($data);
 				if(!$result)
 				{
@@ -146,7 +148,7 @@ class Commodity extends Seller_Controller
 	public function list_comm()
 	{
 		$user=$this->session->userdata('email');
-		$data['goods']=$this->commodity_model->list_comm($user);
+		$data['goods']=$this->commodity_model->list_comm_complex($user);
 		$this->load->view('seller/list_comm.html',$data);
 		
 	}
@@ -273,16 +275,6 @@ public function test()
 	$data2=$this->category_model->display_cate(48,2);
 	//$data3=$this->__recursion(10,0);
 	var_dump($data2);
-}
-
-private function __recursion($setting,$input)
-{
-	if($input<=$setting)
-	{
-		echo $input." , ";
-		$this->__recursion($setting, $input+1);
-	}
-	return $input;
 }
 
 

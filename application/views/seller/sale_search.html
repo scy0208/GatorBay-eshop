@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="<?=base_url("src/styles/bootstrap.min.css")?>">
+    <link rel="stylesheet" href="<?=base_url("src/styles/dashboard.css")?>">
+    <script src="<?=base_url("src/js/jquery.min.js")?>"></script>
+    <script src="<?=base_url("src/js/bootstrap.min.js")?>"></script>
+    <title>Seller Dashbord</title>
+ </head>
+
+<div class="row">
+	<div class="col-md-9">
+		<div class="media">
+		  <div class="media-left">
+		      <img class="media-object" src="<?=base_url("src/images/listcomm-icon.png")?>" width="64px" length="64px">
+		  </div>
+		  <div class="media-body">
+		    <h3 class="media-heading">Sale Analysis</h3>
+		    You can analysis your sale here
+		  </div>
+		</div>
+	</div>
+</div>
+
+<div class="container">
+	<form role="form" class="form-inline">
+		<div class="form-group">
+			<label for="begin_date">Begin date：</label>
+			<input id="begin_date" class="form-control" type="date" value="2015-01-01"/>
+		</div>
+		<div class="form-group">
+			<label for="end_date">End date：</label>
+			<input id="end_date" class="form-control" type="date" value="2015-12-31"/>
+		</div>
+
+		<div class="form-group">
+			<lable for="cat_id">Category Name: </lable>
+			<select class="form-control" name="cat_id" id="cat_id">
+				<option value= '0'>	All categories </option>
+				<?php foreach($cates as $cate) :?>
+					<option value= "<?php echo $cate['cat_id'] ;?>">
+						<?php echo str_repeat('&nbsp;&nbsp;&nbsp;&nbsp;',$cate['level']).$cate['cat_name']?>
+				<?php endforeach?>  
+			</select>
+		</div>
+
+		<a type="button" class="btn btn-primary" id="analysis" name="analysis">
+			Analysis
+		</a>
+	</form>
+	<div class="container" id="content">
+	</div>
+
+
+</div>
+
+<script>
+	$("#analysis").click(function(){
+		var url = "<?php echo site_url('seller/order/create_sale_html');?>";
+		$.get(url, {
+			"begin_date":document.getElementById("begin_date").value, 
+			"end_date":document.getElementById("end_date").value, 
+			"cat_id":document.getElementById("cat_id").value
+		}, function(data){
+			$("#content").html(data);
+		});
+	});
+
+	
+</script>
+

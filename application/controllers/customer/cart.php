@@ -9,9 +9,9 @@ class Cart extends Customer_Controller
 		$this->load->model('commodity_model');
 		$this->load->library('form_validation');
 	}
-	public function list_cart($user)
+	public function list_cart()
 	{
-
+		$user=$this->session->userdata('email');
 		$data['goods'] = $this->cart_model->list_cart($user);
 		$this->load->view('customer/list_cart.html',$data);
 	}
@@ -34,7 +34,7 @@ class Cart extends Customer_Controller
 		{
 			$data['goods_id']=$this->input->post('goods_id',true);
 			$data['user_id']=$this->input->post('user_id');
-			$data['number']=$this->input->post('number',true);
+			$data['num']=$this->input->post('number',true);
 			if($this->cart_model->add_cart($data))
 			{
 				$data['type'] = "1";

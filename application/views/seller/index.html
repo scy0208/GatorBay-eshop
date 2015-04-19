@@ -52,14 +52,9 @@
             	<ul class="nav">
                 	<li class="active"><a href="#add" data-toggle="tab">Add New Commodity</a></li>
               		<li><a href="#list" data-toggle="tab">List Commodity</a></li>
-                  <li><a href="#type" data-toggle="tab">Type Management</a></li>
-              		<li><a href="#attribute" data-toggle="tab">Attribute Management</a></li>
-                  <li><a href="#customer" data-toggle="tab">Customer Management</a></li>
-              		<li><a href="#seller" data-toggle="tab">Seller Management</a></li>
-                  <li><a href="#commodity" data-toggle="tab">Commodity Management</a></li>
                   <li><a href="#order" data-toggle="tab">Order Management</a></li>
-              		<li><a href="#comment" data-toggle="tab">Comment Management</a></li>
-              		<li><a href="#complain" data-toggle="tab">Complain Management</a></li>
+              		<li><a href="#sale" data-toggle="tab">Sale Analysis</a></li>
+                  <li><a href="#income" data-toggle="tab">Income Management</a></li>
           		</ul>
             </div>
           </div>
@@ -72,18 +67,15 @@
                   <div class="tab-pane" id="list">
                     <iframe frameborder="0" src="<?=site_url("seller/commodity/list_comm")?>" width="100%" height="850px"></iframe>
                   </div>
-                  <div class="tab-pane" id="type">
-                    <iframe frameborder="0" src="<?=site_url("admin/goodstype")?>" width="100%" height="850px"></iframe>
+                  <div class="tab-pane" id="order">
+                    <iframe frameborder="0" src="<?=site_url("seller/order/order_list")?>" width="100%" height="850px"></iframe>
                   </div>
-                  <div class="tab-pane" id="attribute">
-                    <iframe frameborder="0" src="<?=site_url("admin/attribute")?>" width="100%" height="850px"></iframe>
+                  <div class="tab-pane" id="sale">
+                    <iframe frameborder="0" src="<?=site_url("seller/order/sale_search")?>" width="100%" height="850px"></iframe>
                   </div>
-                  <div class="tab-pane" id="customer">4</div>
-                  <div class="tab-pane" id="seller">5</div>
-                  <div class="tab-pane" id="commodity">6</div>
-                  <div class="tab-pane" id="order">7</div>
-                  <div class="tab-pane" id="comment">8</div>
-                  <div class="tab-pane" id="complain">9</div>
+                  <div class="tab-pane" id="income">
+                    <iframe frameborder="0" src="<?=site_url("seller/order/income_analysis")?>" width="100%" height="850px"></iframe>
+                  </div>
               </div>
             </div>
 

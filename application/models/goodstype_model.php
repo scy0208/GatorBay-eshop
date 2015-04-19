@@ -7,19 +7,20 @@ class Goodstype_model extends CI_Model
 	{		
 		$query = $this->db->query("select * from ".self::TBL_TYPE);
 		$types = $query->result_array();
-		return $types;		
+		return $this->change_array($types);		
 	}
 	public function get_all_type()
 	{		
 		$query = $this->db->query("select * from ".self::TBL_TYPE);
 		$types = $query->result_array();
-		return $types;		
+		return $this->change_array($types);		
 	}
 
 	public function select_type($type_id)
 	{
 		$query = $this->db->query("select * from ".self::TBL_TYPE." where type_id= '".$type_id."'");
-		return $query->row_array();
+		$result=$query->row_array();
+		return $this->change_row($result);
 	}
 	public function update_type($data)
 	{
@@ -32,5 +33,39 @@ class Goodstype_model extends CI_Model
 	public function delete_type($type_id)
 	{
 		return $this->db->query("delete from ".self::TBL_TYPE." where type_id = '".$type_id."'");
+	}
+
+	public function change_array($inputs)
+	{
+		if(!empty($inputs))	
+		{
+			foreach($inputs as $index=>$input):
+				foreach($input as $key=>$value):
+					$new_key=strtolower($key);
+					$output[$new_key]=$value;
+				endforeach;
+			$outputs[]=$output;
+			endforeach;
+			return $outputs;
+		}
+		else
+		{return $inputs;}	
+		
+	}
+	
+	public function change_row($input)
+	{
+		if(!empty($input))	
+		{
+			foreach($input as $key=>$value):
+					$new_key=strtolower($key);
+					$output[$new_key]=$value;
+			endforeach;
+			return $output;
+		}
+		else
+		{
+			return $input;
+		}
 	}
 }
